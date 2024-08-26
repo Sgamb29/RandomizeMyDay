@@ -64,6 +64,11 @@ function randomize() {
         currentList[i].value = shuffledList[i];
     }
 
+    // Hack for making button animation run every press by removing the focus
+    setTimeout(() => {
+        document.getElementById("dummyButton").focus();
+
+    }, 1000);
 }
 
 function getRandomInt(max) {
