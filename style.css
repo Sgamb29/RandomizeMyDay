@@ -1,0 +1,84 @@
+
+
+
+html, body {
+    height: 100%;
+
+}
+
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(45deg, white, red, white);
+    min-height: 100%;
+    text-align: center;
+}
+
+.activityInputs {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
+
+.activityInput {
+    text-align: center;
+    font-size: x-large;
+    border: 2px black solid;
+    border-radius: 33%;
+    width: 50%;
+    margin: 3px;
+}
+
+@media (width < 800px) {
+    .activityInput {
+        width: 95%;
+    }
+}
+
+.mainButton {
+    font-size: x-large;
+    margin: 3px;
+    border-radius: 20%;
+    padding: 8px;
+    background-color: pink;
+}
+
+.mainButton:active {
+    animation-duration: 4s;
+    animation-iteration-count: 1;
+    animation-name: growshrink;
+
+}
+
+@keyframes growshrink {
+    from {
+        scale: 125%;
+        background-color: lightcoral;
+    }
+
+    25% {
+        scale: 175%;
+        rotate: 90deg;
+    }
+
+    50% {
+        scale: 200%;
+        rotate: 180deg;
+    }
+
+    75% {
+        scale: 250%;
+        rotate: 270deg;
+    }
+
+    to {
+        scale: 300%;
+        rotate: 360deg;
+        background-color: pink;
+    }
+
+
+}
