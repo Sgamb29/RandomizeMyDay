@@ -46,12 +46,13 @@ html, body {
     background-color: pink;
 }
 
-.mainButton:active {
-    animation-duration: 4s;
+.mainButton:active, .mainButton:focus {
+    animation-duration: 1s;
     animation-iteration-count: 1;
     animation-name: growshrink;
 
 }
+
 
 @keyframes growshrink {
     from {
@@ -60,23 +61,16 @@ html, body {
     }
 
     25% {
-        scale: 175%;
-        rotate: 90deg;
+        scale: 140%;
     }
 
     50% {
-        scale: 200%;
-        rotate: 180deg;
+        scale: 160%;
     }
 
-    75% {
-        scale: 250%;
-        rotate: 270deg;
-    }
 
     to {
-        scale: 300%;
-        rotate: 360deg;
+        scale: 175%;
         background-color: pink;
     }
 

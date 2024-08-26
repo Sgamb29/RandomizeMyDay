@@ -47,17 +47,17 @@ function randomize() {
     let shuffledList = [];
     currentList.pop();
     while (shuffledList.length < currentList.length) {
-        let activity = currentList[getRandomInt(currentList.length)].value;
+        let activityElement = currentList[getRandomInt(currentList.length)];
         let isAlreadyChosen = false;
         alreadyChosen.forEach((i) => {
-            if (activity == i) {
+            if (activityElement === i) {
                 isAlreadyChosen = true;
             }
         })
 
         if (!isAlreadyChosen) {
-            shuffledList.push(activity);
-            alreadyChosen.push(activity);
+            shuffledList.push(activityElement.value);
+            alreadyChosen.push(activityElement);
         }
     }
     for (let i = 0; i < shuffledList.length; i++) {
