@@ -32,6 +32,8 @@ html, body {
     margin: 3px;
 }
 
+
+
 @media (width < 800px) {
     .activityInput {
         width: 95%;
@@ -75,4 +77,16 @@ html, body {
     }
 
 
+}
+
+
+.extraButtons {
+    background-color: pink;
+    margin: 4px;
+    font-size: larger;
+}
+
+.buttonsContainer {
+    display: flex;
+    flex-direction: row;
 }
