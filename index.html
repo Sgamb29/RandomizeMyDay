@@ -7,8 +7,13 @@
     <title>Randomize My Day</title>
 </head>
 <body>
-    <div class="container">
+    <div id="container" class="container">
         <h1 class="title">Randomize My Day</h1>
+        <div class="options">
+            <button class="extraButtons" onclick="randomizeColor()">Get Random Site Color</button>
+            <button class="extraButtons" onclick="defaultColor()">Default Color</button>
+            <p class="saveOnRemove" id="saveOnRemove" onclick="toggleSaveOnRemove()">Save On Remove: off</p>
+        </div>
         <h2>Input The Activities You Want to Do to Randomize The "Order of Action"</h2>
         <button class="mainButton" onclick="randomize()">Randomize</button>
         <button id="dummyButton"></button>

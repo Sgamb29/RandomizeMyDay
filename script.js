@@ -34,8 +34,12 @@ function addDeleteButton(el) {
     delBtn.style.backgroundColor = "pink";
     delBtn.className = "deleteButton";
     delBtn.addEventListener("click", () => {
+        indicateNoSave();
         document.getElementById("inputs").removeChild(el);
         document.getElementById("inputs").removeChild(delBtn);
+        if (saveOnRemove) {
+            saveList();
+        }
     });
     delBtn.innerText = "Remove";
     document.getElementById("inputs").appendChild(delBtn);
@@ -94,9 +98,18 @@ function getRandomInt(max) {
 // Cookie Logic
 
 function getCookie(name) {
-    const value = document.cookie.split(`${name}=`)[1];
-    const listStrings = value.split(",");
-    return listStrings;    
+    try {
+        const value = document.cookie.split(`${name}=`)[1].split(";")[0];
+        if (name === "currentList") {
+            const listStrings = value.split(",");
+            return listStrings;
+        }
+        
+        return value;
+        } catch {
+            return "";
+        }
+        
 }
 
 function setCookie(name, value, days) {
@@ -117,7 +130,7 @@ function saveList() {
         }
         listStrings.push(el.value.replaceAll(",", "commaEncode1"));
     });
-    setCookie('currentList', listStrings, 365);
+    setCookie('currentList', listStrings, 10000);
     document.getElementById("saveButton").innerText = "Saved"
 }
 
@@ -130,6 +143,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function generateSavedList() {
     const listStrings = getCookie("currentList");
+    
+
+    // Getting other settings cookies and checking for empty values
+    const backgroundTemp = getCookie("background");
+    if (backgroundTemp !== "") {
+        document.getElementById("container").style.background = backgroundTemp;
+    }
+    
+    const saveOnRemoveTemp = getCookie("saveOnRemove");
+    if (saveOnRemoveTemp !== "") {
+        saveOnRemove = saveOnRemoveTemp === "true" ? true : false;
+        document.getElementById("saveOnRemove").innerText = saveOnRemove ? "Save On Remove: on" : "Save On Remove: off";
+    }
+    
     if (listStrings.length < 1) {
         return;
     }
@@ -160,7 +187,7 @@ function generateSavedList() {
 
 function removeSave() {
     setCookie("currentList", "", 365);
-    document.getElementById("saveButton").innerText = "Save List"; 
+    indicateNoSave();
     document.getElementById("removeSaveButton").innerText = "Save Removed";
 }
 
@@ -172,7 +199,50 @@ function clearAll() {
         el.click();
     })
 
-    document.getElementById("saveButton").innerText = "Save List"; 
+    indicateNoSave();
 
+
+}
+
+function indicateNoSave() {
+    document.getElementById("saveButton").innerText = "Save List"; 
+}
+
+function randomizeColor() {
+    let colors = [];
+
+    for (let x = 0; x < 3; x++) {
+        let rgbStr = "rgb("
+        for (let i = 0; i < 3; i++) {
+            if (i !== 0) {
+                rgbStr = rgbStr + ",";
+            }
+            rgbStr = rgbStr + getRandomInt(255).toString();
+        }
+        rgbStr = rgbStr + ")";
+        colors.push(rgbStr);
+    }    
+    const gradientStr = `linear-gradient(45deg, ${colors[0]}, ${colors[1]}, ${colors[2]})`
+    document.getElementById("container").style.background = gradientStr;
+    setCookie("background", gradientStr, 10000);
+}
+
+function defaultColor() {
+    document.getElementById("container").style.background = `linear-gradient(45deg, white, red, white)`;
+    setCookie("background", `linear-gradient(45deg, white, red, white)`, 10000);
+
+}
+
+function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+}
+
+let saveOnRemove = false;
+
+function toggleSaveOnRemove() {
+    saveOnRemove = !saveOnRemove;
+    const elStr = "Save On Remove: ";
+    document.getElementById("saveOnRemove").innerText = saveOnRemove ? elStr + "on" : elStr + "off";
+    setCookie("saveOnRemove", saveOnRemove.toString(), 10000);
 
 }

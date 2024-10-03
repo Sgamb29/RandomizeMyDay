@@ -3,6 +3,7 @@
 
 html, body {
     height: 100%;
+    margin: 0px;
 
 }
 
@@ -89,4 +90,10 @@ html, body {
 .buttonsContainer {
     display: flex;
     flex-direction: row;
+}
+
+.saveOnRemove {
+    margin: 5px;
+    background-color: lightpink;
+    border: 1px solid black;
 }
