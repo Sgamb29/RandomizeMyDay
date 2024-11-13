@@ -26,7 +26,14 @@
             <p class="saveOnRemove" id="saveOnRemove" onclick="toggleSaveOnRemove()">Save On Remove: off</p>
         </div>
         <h2>Input The Activities You Want to Do to Randomize The "Order of Action"</h2>
-        <button class="mainButton" onclick="randomize()">Randomize</button>
+
+        <div class="buttonsContainer">
+            <button class="mainButton" onclick="randomize()">Randomize</button>
+            <button class="mainButton" onclick="chooseOne()">Choose One</button>
+        </div>
+        <div class="buttonsContainer">
+            <button class="mainButton" onclick="chooseOne(2)">Choose Two</button>
+        </div>
         <button id="dummyButton"></button>
         <div id="inputs" class="activityInputs">
             <textarea class="activityInput" rows="2" wrap="soft">+</textarea>

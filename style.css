@@ -47,6 +47,7 @@ html, body {
     border-radius: 20%;
     padding: 8px;
     background-color: pink;
+    border: 1px solid black;
 }
 
 .mainButton:active, .mainButton:focus {
@@ -101,4 +102,8 @@ html, body {
 footer {
     margin-top: 10px;
     margin-bottom: 10px;
+}
+
+button {
+    border: 1px solid black;
 }

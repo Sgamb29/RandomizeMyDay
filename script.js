@@ -43,6 +43,7 @@ function addDeleteButton(el) {
     });
     delBtn.innerText = "Remove";
     document.getElementById("inputs").appendChild(delBtn);
+    
 }
 
 
@@ -59,8 +60,7 @@ function addNewTextArea() {
 
 
 function randomize() {
-    const currentElements = document.getElementsByClassName("activityInput");
-    const currentList = Array.from(currentElements);
+    const currentList = getArrayOfActivityInputs();
 
     let alreadyChosen = [];
     let shuffledList = [];
@@ -95,6 +95,13 @@ function getRandomInt(max) {
 }
 
 
+function getArrayOfActivityInputs() {
+    const currentElements = document.getElementsByClassName("activityInput");
+    return Array.from(currentElements);
+}
+
+
+
 // Cookie Logic
 
 function getCookie(name) {
@@ -120,9 +127,7 @@ function setCookie(name, value, days) {
 }
 
 function saveList() {
-
-    const currentElements = document.getElementsByClassName("activityInput");
-    const currentList = Array.from(currentElements);
+    const currentList = getArrayOfActivityInputs();
     let listStrings = [];
     currentList.forEach((el) => {
         if (el.value == "+" | el.value === "") {
@@ -164,8 +169,7 @@ function generateSavedList() {
         return;
     }
 
-    let activtyElements = document.getElementsByClassName("activityInput");
-    let activityElList = Array.from(activtyElements);
+    let activityElList = getArrayOfActivityInputs()
     let currentAdderElement = activityElList[0];
     currentAdderElement.value = listStrings[0].replaceAll("commaEncode1", ",");
     addDeleteButton(currentAdderElement);
@@ -192,8 +196,7 @@ function removeSave() {
 }
 
 function clearAll() {
-    let deleteButtons = document.getElementsByClassName("deleteButton");
-    let deleteElList = Array.from(deleteButtons);
+    let deleteElList = getArrayOfDeleteButtons();
 
     deleteElList.forEach((el) => {
         el.click();
@@ -202,6 +205,11 @@ function clearAll() {
     indicateNoSave();
 
 
+}
+
+function getArrayOfDeleteButtons() {
+    let deleteButtons = document.getElementsByClassName("deleteButton");
+    return Array.from(deleteButtons);
 }
 
 function indicateNoSave() {
@@ -245,4 +253,23 @@ function toggleSaveOnRemove() {
     document.getElementById("saveOnRemove").innerText = saveOnRemove ? elStr + "on" : elStr + "off";
     setCookie("saveOnRemove", saveOnRemove.toString(), 10000);
 
+}
+
+
+function chooseOne(number=0) {
+    randomize();
+    const els = getArrayOfActivityInputs();
+    const delEls = getArrayOfDeleteButtons();
+    els[0].hidden = false;
+    let startIndex = 1;
+    if (number === 2 & els.length >= 2) {
+        els[1].hidden = false;
+        startIndex = 2;
+    }
+    for (let i = startIndex; i < els.length; i++) {
+        els[i].hidden = !els[i].hidden ? true : false;
+    }
+    delEls.forEach((el) => {
+        el.hidden = !el.hidden;
+    })
 }
